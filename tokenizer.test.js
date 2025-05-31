@@ -12,6 +12,7 @@ Deno.test("Tokenizer", async (t) => {
     },
   });
 
+  
   await t.step({
     name: "tokenize a number",
     fn: () => {

@@ -74,21 +74,37 @@ const tokenize = (input) => {
   const graphemes = Array.from(input.trim());
 
   const loop = (
-    progressiveScope,
+    tokens,
     [graphemeAtHand, ...restOfGraphemes],
     tokenSoFar = "",
   ) => {
     throw new Error("Not implemented");
   };
 
-  return loop([[]], graphemes);
+  return loop([], graphemes);
 };
+
 
 const evaluate = (expression) => {
   // If the expression is a number, return it
-  // If it is an array,
-  //   assume the first element is a function and the rest are arguments
-  //   evaluate the function with the arguments
+  if (typeof expression === 'number') {
+    return expression;
+  }
 
-  throw new Error("Not implemented");
+  // If the expression is an array
+  if (Array.isArray(expression)) {
+    const [fn, ...args] = expression; // Destructure the first element as the function, rest as arguments
+    
+    // Ensure the first element is a function
+    if (typeof fn !== 'function') {
+      throw new Error("The first element must be a function.");
+    }
+    
+    // Call the function with the arguments
+    return fn(...args);
+  }
+
+  // If expression is neither a number nor an array, throw an error
+  throw new Error("Not implemented or invalid expression");
 };
+
